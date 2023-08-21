@@ -1,10 +1,9 @@
 header {
-    background-color: beige;
-    display: inline-block;
+    background-color:aqua;
+    display: block;
     text-align: center;
-    margin: 0, auto;
 }
 
 #panel-left {
-    background-color: bisque;
+    background-color:blueviolet;
 }

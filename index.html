@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/js/script.js" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+
     <title>5DayQuickView</title>
 </head>
+
 <body>
 
     <!-- header goes here -->
@@ -20,25 +24,40 @@
     - search box and button
     - and results history
      -->
-    <section id="panel-left"></section>
-    <section id="panel-main">
+     <section id="main-body">
 
-    <!-- form goes here -->
-    <form id="inputForm">
+        <!-- search options show here -->
+        <div id="panel-left">
 
-        <!-- text input field to capture a search query -->
-        <input id="searchQuery">
-
-        <!-- a button to submit form -->
-        <button id="submitButton">Search</button>
-
-
-    </form>
-
-
-    </section>
+            <!-- form goes here -->
+            <form id="inputForm">
     
+                <!-- text input field to capture a search query -->
+                <input id="searchQuery">
+    
+                <!-- a button to submit form -->
+                <button id="submitButton">Search</button>
+    
+            </form>
+            <div id="recentCitySearches">
+                <!-- this section to be used via javaScript - do not add html here -->
+                <!-- add any recently searched city names here for quick select -->
+            </div>
+    
+        </div>
 
+        <!-- search results show Header -->
+        <div id="panel-main">
+
+
+        </div>
+     </section>
+    
+   
+
+
+    <script src="./assets/js/script.js"></script>
 
 </body>
+
 </html>
