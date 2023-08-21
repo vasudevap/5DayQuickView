@@ -1,9 +1,58 @@
 header {
-    background-color:aqua;
+    background-color:darkblue;
+    background: linear-gradient(to right, #33ccff 0%, darkblue 100%);
     display: block;
     text-align: center;
+    padding: 50px;
+    color: white;
+    font-size: xx-large;
+}
+
+#main-body {
+    display: flex;
+    flex-flow: row nowrap;
+    background-color: aquamarine;
+    justify-content: space-between;
 }
 
 #panel-left {
+    /* display: block; */
+    
+    display: flex;
+    flex-flow: column nowrap;
+
     background-color:blueviolet;
+    color: aquamarine;
+    flex: 0 0 200px;
+    /* padding: 20px; */
+    
+    /* background-color: aquamarine; */
+    justify-content: flex-start;
+}
+
+#inputForm {
+    display: flex;
+    flex-flow: column nowrap;
+
+    background-color:green;
+    color:pink;
+    
+    padding: 20px;
+
+}
+
+#recentCitySearches {
+    display: flex;
+    flex-flow: column nowrap;
+
+    background-color:violet;
+    color:yellow;
+    
+    padding: 20px;
+
+}
+
+
+#panel-main {
+    background-color:blanchedalmond;
 }
