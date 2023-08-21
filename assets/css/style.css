@@ -1,0 +1,10 @@
+header {
+    background-color: beige;
+    display: inline-block;
+    text-align: center;
+    margin: 0, auto;
+}
+
+#panel-left {
+    background-color: bisque;
+}
