@@ -1,5 +1,5 @@
 header {
-    background-color:darkblue;
+    background-color: darkblue;
     background: linear-gradient(to right, #33ccff 0%, darkblue 100%);
     display: block;
     text-align: center;
@@ -17,15 +17,15 @@ header {
 
 #panel-left {
     /* display: block; */
-    
+
     display: flex;
     flex-flow: column nowrap;
 
-    background-color:blueviolet;
+    background-color: blueviolet;
     color: aquamarine;
     flex: 0 0 200px;
     /* padding: 20px; */
-    
+
     /* background-color: aquamarine; */
     justify-content: flex-start;
 }
@@ -34,9 +34,9 @@ header {
     display: flex;
     flex-flow: column nowrap;
 
-    background-color:green;
-    color:pink;
-    
+    background-color: green;
+    color: pink;
+
     padding: 20px;
 
 }
@@ -45,14 +45,14 @@ header {
     display: flex;
     flex-flow: column nowrap;
 
-    background-color:violet;
-    color:yellow;
-    
+    background-color: violet;
+    color: yellow;
+
     padding: 20px;
 
 }
 
 
 #panel-main {
-    background-color:blanchedalmond;
+    background-color: blanchedalmond;
 }
