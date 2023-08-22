@@ -30,15 +30,16 @@
         <div id="panel-left">
 
             <!-- form goes here -->
-            <form id="inputForm">
+            <div id="inputForm">
     
                 <!-- text input field to capture a search query -->
-                <input id="searchQuery">
+                <label for="searchCity">Search for a City:</label>
+                <input type="text" id="searchCity" name="searchCity">
     
                 <!-- a button to submit form -->
-                <button id="submitButton">Search</button>
+                <button type="submit" id="submitButton">Search</button>
     
-            </form>
+            </div>
             <div id="recentCitySearches">
                 <!-- this section to be used via javaScript - do not add html here -->
                 <!-- add any recently searched city names here for quick select -->
@@ -50,7 +51,7 @@
         <!-- search results show Header -->
         <div id="panel-main">
 
-            <p>Search results will show up here</p>
+            <p id="resultsPage">Search results will show up here</p>
 
         </div>
      </section>
