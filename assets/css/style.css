@@ -56,3 +56,16 @@ header {
 #panel-main {
     background-color: blanchedalmond;
 }
+
+#currentCityWeather {
+    color: black;
+    background-color: white;
+    border: solid;
+    padding: 25px;
+}
+
+.weatherIcon {
+    width: 30px;
+    padding: 1px;
+    background-color: grey;
+}

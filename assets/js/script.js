@@ -67,7 +67,7 @@ var createSearchQuery = function(cityName){
             var cityLon = data[0].lon;
             var cityLat = data[0].lat;
 
-            var apiURL = "https://api.openweathermap.org/data/2.5/weather?lat="+cityLat+"&lon="+cityLon+"&appid=34188d1321d0f8500a6319995d20223e";
+            var apiURL = "https://api.openweathermap.org/data/2.5/weather?lat="+cityLat+"&lon="+cityLon+"&appid=34188d1321d0f8500a6319995d20223e&units=imperial";
 
             // console.log(apiURL);
 
@@ -76,8 +76,37 @@ var createSearchQuery = function(cityName){
               if (response.ok) {
                 response.json().then(function(weatherData) {
 
+                  var todayDateObj = new Date;
+                  var todayDate = "("+todayDateObj.getMonth()+"/"+todayDateObj.getDate()+"/"+todayDateObj.getFullYear()+")";
+
+                  // resolve the icon
+                  var weatherIconHref = "https://openweathermap.org/img/wn/"+weatherData.weather[0].icon+"@2x.png";
+
+                  console.log(todayDateObj);
+                  console.log(todayDateObj.getMonth());
+                  console.log(todayDateObj.getDate());
+                  console.log(todayDateObj.getFullYear());
+                  console.log(todayDate);
                   console.log(weatherData);
-                  resultsPEl.textContent = JSON.stringify(weatherData);
+                  // resultsPEl.textContent = JSON.stringify(weatherData);
+                  document.getElementById("currentCityNameDateIcon").textContent = weatherData.name+" "+todayDate+" ";
+
+                  var weatherIcon = document.createElement("img");
+                  weatherIcon.setAttribute("class","weatherIcon");
+                  weatherIcon.setAttribute("alt","weather icon");
+                  weatherIcon.setAttribute("src",weatherIconHref);
+
+                  document.getElementById("currentCityNameDateIcon").appendChild(weatherIcon);
+
+
+                  console.log(weatherIconHref);
+
+                  document.getElementById("currentCityTemp").textContent = "Temp: "+weatherData.main.temp+" ºF";
+                  
+                  document.getElementById("currentCityWind").textContent = "Wind: "+weatherData.wind.gust+" MPH";
+                  
+                  document.getElementById("currentCityHumidity").textContent = "Humidity: "+weatherData.main.humidity+" %";
+
                 })
               } else {
                 alert('Error: ' + response.statusText);
