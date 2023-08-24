@@ -36,7 +36,7 @@ var getWeatherData = function (cityName) {
   // making an api call to openweathermap's
   // geocoder api
 
-  var apiGeo = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=34188d1321d0f8500a6319995d20223e";
+  var apiGeo = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=34188d1321d0f8500a6319995d20223e";
   
   // get coordinates of city searched from input field
   fetch(apiGeo)
