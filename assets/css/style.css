@@ -8,6 +8,11 @@ header {
     font-size: xx-large;
 }
 
+p {
+    padding: 5px;
+    margin: 5px 0;
+}
+
 #main-body {
     display: flex;
     flex-flow: row nowrap;
@@ -54,19 +59,18 @@ header {
     display: flex;
     flex-flow: column nowrap;
     background-color: white;
-    border: solid;
     padding: 25px;
     flex: 1 1 100%;
 
 }
 
-/* #currentCityWeather {
-    color: black;
-    background-color: white;
+#currentCityWeather {
+    /* color: black; */
+    /* background-color: white; */
     border: solid;
     padding: 25px;
-    flex: 1 0 100%;
-} */
+    /* flex: 1 0 100%; */
+}
 
 .weatherIcon {
     width: 30px;
@@ -91,4 +95,37 @@ header {
       inset -2px -2px 3px rgba(0, 0, 0, 0.6); */
     margin: 2px;
    
+}
+
+#fiveDayView {
+    display: flex;
+    flex-flow: row wrap;
+    color: white;
+}
+
+#currentCityNameDateIcon {
+    margin: 10px 0;
+    font-size: xx-large;
+    color: black;
+}
+
+#fiveDayView h1 {
+    flex: 0 0 100%;
+    margin: 20px 0 5px 10px;
+    font-size: xx-large;
+    color: black;
+}
+
+.forecastCard {
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: darkslategray;
+    padding: 10px;
+    margin: 10px;
+    flex: 0 1 18%;
+}
+
+.forecastCard {
+    font-size: larger;
+    margin: 5px
 }
