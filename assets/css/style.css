@@ -12,7 +12,7 @@ header {
     display: flex;
     flex-flow: row nowrap;
     background-color: aquamarine;
-    justify-content: space-between;
+    justify-content:flex-start;
 }
 
 #panel-left {
@@ -34,8 +34,8 @@ header {
     display: flex;
     flex-flow: column nowrap;
 
-    background-color: green;
-    color: pink;
+    background-color: white;
+    color: black;
 
     padding: 20px;
 
@@ -44,25 +44,29 @@ header {
 #recentCitySearches {
     display: flex;
     flex-flow: column nowrap;
-
-    background-color: violet;
+    background-color: whitesmoke;
     color: yellow;
-
     padding: 15px;
-
 }
 
 
 #panel-main {
-    background-color: blanchedalmond;
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: white;
+    border: solid;
+    padding: 25px;
+    flex: 1 1 100%;
+
 }
 
-#currentCityWeather {
+/* #currentCityWeather {
     color: black;
     background-color: white;
     border: solid;
     padding: 25px;
-}
+    flex: 1 0 100%;
+} */
 
 .weatherIcon {
     width: 30px;
@@ -73,18 +77,18 @@ header {
 .recentCitiesButton {
 
     flex: 0 1 30px;
-    line-height: 2.5;
+    /* line-height: 1.5; */
     padding: 0 25px;
     font-size: 15px;
     text-align: center;
-    color: #fff;
-    text-shadow: 1px 1px 1px #000;
-    border-radius: 10px;
-    background-color: rgba(220, 0, 0, 1);
-    background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0));
-    box-shadow:
-      inset 2px 2px 3px rgba(255, 255, 255, 0.6),
-      inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+    color: black;
+    /* text-shadow: 1px 1px 1px #000; */
+    border-radius: 6px;
+    background-color: lightgray;
+    /* background-image: linear-gradient(to top left, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 0)); */
+    /* box-shadow: */
+      /* inset 2px 2px 3px rgba(255, 255, 255, 0.6),
+      inset -2px -2px 3px rgba(0, 0, 0, 0.6); */
     margin: 2px;
    
 }
