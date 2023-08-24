@@ -6,11 +6,12 @@ var resultsPEl = document.getElementById("resultsPage")
 var recentCitiesInStorage = localStorage.getItem("5DQV-Cities");
 var recentsButtonElList = document.querySelectorAll(".recentCitiesButton");
 
+// handle event when city is searched for in input field
 var searchSubmitHandler = function () {
 
   if (inputSearch.value) {
 
-    createSearchQuery(inputSearch.value);
+    getWeatherData(inputSearch.value);
 
   } else {
 
@@ -18,14 +19,14 @@ var searchSubmitHandler = function () {
 
   }
 }
-
+// handle event when recent cities is clicked
 var recentsClickHandler = function (citySelected) {
 
-  createSearchQuery(citySelected);
+  getWeatherData(citySelected);
 
 };
-
-var createSearchQuery = function (cityName) {
+// create search query and connect with api
+var getWeatherData = function (cityName) {
 
   var lat = 0;
   var lon = 0;
@@ -36,31 +37,37 @@ var createSearchQuery = function (cityName) {
   // geocoder api
 
   var apiGeo = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&limit=5&appid=34188d1321d0f8500a6319995d20223e";
-
+  
+  // get coordinates of city searched from input field
   fetch(apiGeo)
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
 
+          // capture cities coordinates
           var cityLon = data[0].lon;
           var cityLat = data[0].lat;
 
           var apiURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + cityLat + "&lon=" + cityLon + "&appid=34188d1321d0f8500a6319995d20223e&units=imperial";
-
+          
+          // get weather data for city using coordinates just obtained
           fetch(apiURL)
             .then(function (response) {
               if (response.ok) {
                 response.json().then(function (weatherData) {
 
+                  // create today's date
                   var todayDateObj = new Date;
                   var todayDate = "(" + todayDateObj.getMonth() + "/" + todayDateObj.getDate() + "/" + todayDateObj.getFullYear() + ")";
 
+                  // add weather information to the current weather up top
                   createWeatherCard(weatherData, todayDate);
+
+                  // save or refresh searched city in localStorage
                   saveCityToRecentSearches(cityName);
 
+                  // get 5-day forecast
                   var apiURL5Day = "https://api.openweathermap.org/data/2.5/forecast?cnt=121&lat="+ cityLat + "&lon=" + cityLon + "&appid=34188d1321d0f8500a6319995d20223e&units=imperial";
-
-                  // console.log(apiURL5Day);
 
                   fetch(apiURL5Day)
 
@@ -74,22 +81,14 @@ var createSearchQuery = function (cityName) {
                           document.getElementById("fiveDayViewTitle").textContent = "5-Day Forecast:"
                           for (var i=1; i<6; i++) {
 
+                            // weather data gives updates every 3 hours, so 
+                            // 1 day is 24hours/3hours = 8
                             var nextDay = 8*i;
 
-                            // var timestampUnix = weatherForecastData.list[8*i];
-                            // console.log(convertUnixTimestamp(weatherForecastData.list[(8*i)][0]));
-                            // 1692846000
-                            // console.log(JSON.parse(weatherForecastData));
-                            // console.log(weatherForecastData.list[0]);
-                            // console.log(weatherForecastData.list[i].dt_txt);
-
+                            // render 5 day weather (1 day at a time in this loop)
                             create5DayWeatherCard(weatherForecastData.list[nextDay-1], i);
 
                           }
-                          
-
-
-                          // create5DayWeatherCard(forecastToShow);
 
                         })
 
@@ -119,7 +118,7 @@ var createSearchQuery = function (cityName) {
       alert('Unable to connect to OpenWeatherMap');
     });
 };
-
+// for rendering current weather up top
 var createWeatherCard = function (weatherData, forDate) {
 
   // resolve the icon
@@ -138,7 +137,7 @@ var createWeatherCard = function (weatherData, forDate) {
   document.getElementById("currentCityHumidity").textContent = "Humidity: " + weatherData.main.humidity + " %";
 
 }
-
+// for saving or refreshing city searched to the localStorage
 var saveCityToRecentSearches = function (cityName) {
 
   var recentsArray = localStorage.getItem("5DQV-Cities");
@@ -163,6 +162,10 @@ var saveCityToRecentSearches = function (cityName) {
       // recents does not have this city in it
       // so save it to the top position in recents
       recentsArray.unshift(cityName);
+      // set max limit of recent cities storage to 8
+      while (recentsArray.length>8) {
+        recentsArray.pop();
+      };
     }
 
   } else {
@@ -180,7 +183,7 @@ var saveCityToRecentSearches = function (cityName) {
   displayRecents(recentsArray);
 
 };
-
+// for displaying recent cities on the page
 var displayRecents = function (recentsArrayToDisplay) {
 
   var recentsContainer = document.getElementById("recentCitySearches");
@@ -200,30 +203,9 @@ var displayRecents = function (recentsArrayToDisplay) {
 
   }
 }
-
-// var recentsButtonClickHandler = function(event){
-//   event.preventDefault;
-//   console.log(this);  
-// }
-
-searchSubmitButtonEl.addEventListener('click', searchSubmitHandler);
-
-recentCityEl.addEventListener('click', function (event) {
-
-  event.preventDefault;
-  // console.log(event.target);
-
-  // //if button.name is one of the cities
-  // if (event.target.name === "berlin"){
-  // }
-
-  if (recentCitiesInStorage.indexOf(event.target.name) >= 0) {
-    // a city was clicked from history
-    recentsClickHandler(event.target.name);
-  }
-
-});
-
+// for displaying forecast for one day
+// forecastDay is a value between 1 and 5
+// forecastDataArray is forecast data for 1 day
 var create5DayWeatherCard = function (forecastDataArray, forecastDay) {
 
   // console.log(forecastDataArray);
@@ -245,36 +227,33 @@ var create5DayWeatherCard = function (forecastDataArray, forecastDay) {
   weatherIcon.setAttribute("alt", "weather icon");
   weatherIcon.setAttribute("src", weatherIconHref);
 
-  // console.log(forecastDataArray.name+ " " + forecastDay + " ");
-
   document.getElementById(pOfNameDate).textContent = forecastDataArray.dt_txt.slice(5,7)+"/"+forecastDataArray.dt_txt.slice(8,10)+"/"+forecastDataArray.dt_txt.slice(0,4);
-
+  document.getElementById(pOfIcon).innerHTML="";
   document.getElementById(pOfIcon).appendChild(weatherIcon);
   document.getElementById(pOfTemp).textContent = "Temp: " + forecastDataArray.main.temp + " ºF";
   document.getElementById(pOfWind).textContent = "Wind: " + forecastDataArray.wind.speed + " MPH";
   document.getElementById(pOfHumidity).textContent = "Humidity: " + forecastDataArray.main.humidity + " %";
 
 }
-
+// when page loads, print recent cities from localStorage
 if (recentCitiesInStorage) {
   displayRecents(JSON.parse(recentCitiesInStorage));
 }
+// this is kicked off if the submit button is clicked
+searchSubmitButtonEl.addEventListener('click', searchSubmitHandler);
+// this is kicked off when one of the recent cities is clicked
+recentCityEl.addEventListener('click', function (event) {
 
-var convertUnixTimestamp = function(utcTime) {
+  event.preventDefault;
+  // console.log(event.target);
 
-  var unix_timestamp = utcTime;
-  // Create a new JavaScript Date object based on the timestamp
-  // multiplied by 1000 so that the argument is in milliseconds, not seconds.
-  var date = new Date(unix_timestamp * 1000);
-  // Hours part from the timestamp
-  var hours = date.getHours();
-  // Minutes part from the timestamp
-  var minutes = "0" + date.getMinutes();
-  // Seconds part from the timestamp
-  var seconds = "0" + date.getSeconds();
+  // //if button.name is one of the cities
+  // if (event.target.name === "berlin"){
+  // }
 
-  // Will display time in 10:30:23 format
-  var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+  if (recentCitiesInStorage.indexOf(event.target.name) >= 0) {
+    // a city was clicked from history
+    recentsClickHandler(event.target.name);
+  }
 
-  console.log(formattedTime);
-}
+});

@@ -26,7 +26,7 @@ p {
     display: flex;
     flex-flow: column nowrap;
 
-    background-color: blueviolet;
+    background-color: white;
     color: aquamarine;
     flex: 0 0 200px;
     /* padding: 20px; */
